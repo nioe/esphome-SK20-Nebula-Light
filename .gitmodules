@@ -1,0 +1,3 @@
+[submodule "tuya-cloudcutter"]
+	path = tuya-cloudcutter
+	url = git@github.com:tuya-cloudcutter/tuya-cloudcutter.git
