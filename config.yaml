@@ -26,7 +26,8 @@ web_server:
   port: 80
 
 api:
-  password: !secret api_password
+  encryption:
+    key: !secret api_key
 
 packages:
   platform: !include platform_bk72xx.yaml

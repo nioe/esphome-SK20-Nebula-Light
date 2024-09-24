@@ -14,6 +14,7 @@ light:
     red: red
     green: green
     blue: blue
+    gamma_correct: 1.0
     effects:
       - random:
           transition_length: 2.5s
@@ -35,6 +36,7 @@ light:
     name: "${device_name} Laser"
     icon: mdi:star-four-points-outline
     id: laser
+    gamma_correct: 1.0
     output: laser_pwm
     restore_mode: ALWAYS_OFF
 
@@ -44,7 +46,7 @@ light:
     id: button_led0
     output: button_led0_gpio
     restore_mode: ALWAYS_OFF
-    # internal: true
+    internal: true
 
   - platform: monochromatic
     name: "${device_name} Button LED1"
@@ -159,8 +161,8 @@ select:
   on_value:
     then:
       # Make sure the button LED is ON
-      - light.turn_on:
-          id: button_led0
+#      - light.turn_on:
+#          id: button_led0
 
       # [INDEX=0]: Red with Stars
       - if:
