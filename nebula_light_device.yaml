@@ -5,6 +5,26 @@
 # - https://github.com/fonix232/esphome_nebula_light
 # - https://github.com/kireque/esphome_nebula_light/issues/8
 
+text_sensor:
+  - platform: wifi_info
+    ip_address:
+      name: "IP Address"
+    ssid:
+      name: "Connected Wifi SSID"
+    mac_address:
+      name: "Mac Address"
+
+sensor:
+  - platform: uptime
+    name: "Uptime"
+    unit_of_measurement: minutes
+    filters:
+      - lambda: return x / 60.0;
+
+  - platform: wifi_signal
+    name: "Signal"
+    update_interval: 60s
+
 light:
   - platform: rgb
     name: "${device_name} Light"
@@ -15,6 +35,14 @@ light:
     green: green
     blue: blue
     gamma_correct: 1.0
+    on_turn_off:
+      then:
+        # Ensure everything is turned off if no light is on
+        - if:
+            condition:
+              - light.is_off: laser
+            then:
+              - switch.turn_off: switch_main
     effects:
       - random:
           transition_length: 2.5s
@@ -37,6 +65,14 @@ light:
     icon: mdi:star-four-points-outline
     id: laser
     gamma_correct: 1.0
+    on_turn_off:
+      then:
+        # Ensure everything is turned off if no light is on
+        - if:
+            condition:
+              - light.is_off: rgb_light
+            then:
+              - switch.turn_off: switch_main
     output: laser_pwm
     restore_mode: ALWAYS_OFF
 
