@@ -17,7 +17,7 @@ text_sensor:
 sensor:
   - platform: uptime
     name: "Uptime"
-    unit_of_measurement: minutes
+    unit_of_measurement: min
     filters:
       - lambda: return x / 60.0;
 
@@ -77,12 +77,12 @@ light:
     restore_mode: ALWAYS_OFF
 
   # Button LED (UP/Down position, no brightness control)
-  - platform: status_led
-    name: "${device_name} Button Status LED"
-    id: button_led0
-    output: button_led0_gpio
-    restore_mode: ALWAYS_OFF
-    internal: true
+#  - platform: status_led
+#    name: "${device_name} Button Status LED"
+#    id: button_led0
+#    output: button_led0_gpio
+#    restore_mode: ALWAYS_OFF
+#    internal: true
 
   - platform: monochromatic
     name: "${device_name} Button LED1"
@@ -117,7 +117,7 @@ switch:
       - fan.turn_off: motor
       - light.turn_off: laser
       - light.turn_off: rgb_light
-      - light.turn_off: button_led0
+#      - light.turn_off: button_led0
 
 output:
   - platform: libretiny_pwm
